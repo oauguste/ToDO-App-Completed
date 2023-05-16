@@ -9,16 +9,11 @@ class Note {
   }
   setNoteContent(newContent) {
     if (newContent === "") {
-      console.log("You must enter something");
+      return;
     }
     this.content = newContent;
   }
 }
-
-/**
- * Represents a folder in the todo application.
- * @class
- */
 class Folder {
   constructor(folderName, notes) {
     this.folderName = folderName;
@@ -33,7 +28,7 @@ class Folder {
 
   setFolderName(newFolderName) {
     if (newFolderName === "") {
-      console.log("You must provide a folder name ");
+      return;
     }
     this.folderName = newFolderName;
   }

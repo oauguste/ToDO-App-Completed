@@ -8,6 +8,12 @@ test("getNoteContent should return the note content", () => {
   );
 });
 
+test("setNoteContent should not update the note content if the new note is empty", () => {
+  const note = new Note("Initial content");
+  note.setNoteContent("");
+  expect(note.getNoteContent()).toBe("Initial content");
+});
+
 test("setNoteContent should update the note content", () => {
   const note = new Note("Initial content");
   note.setNoteContent("Updatedcontent");
@@ -32,6 +38,15 @@ test("getNotes should return the notes an array containing the notes object", ()
   expect(folder2.getNotes()).toEqual([notes]);
 });
 
+test("addNotesToFolder should add multiple notes to the folder", () => {
+  const folder = new Folder("My Folder", []);
+  const note1 = new Note("Note 1");
+  const note2 = new Note("Note 2");
+  folder.addNotesToFolder(note1);
+  folder.addNotesToFolder(note2);
+  expect(folder.getNotes()).toEqual([note1, note2]);
+});
+
 test("should return the notes content", () => {
   const folder = new Folder("Wednesday", []);
   const note = new Note("Sample content for testing");
@@ -39,6 +54,15 @@ test("should return the notes content", () => {
   expect(folder.getNotes()[0].getNoteContent()).toBe(
     "Sample content for testing"
   );
+});
+
+test("deleteNote should not modify the folder when deleting a non-existent note", () => {
+  const folder = new Folder("My Folder", []);
+  const note = new Note("Note");
+  folder.addNotesToFolder(note);
+  const nonExistentNote = new Note("Non-existent Note");
+  folder.deleteNote(nonExistentNote);
+  expect(folder.getNotes()).toEqual([note]);
 });
 
 test("addFolderToFoldersSystem should add (folder) FolderSystem instance ", () => {
