@@ -11,20 +11,35 @@
 
 <body>
   <div id="appContainer" class="flex items-center justify-center h-screen ">
-    <div id="todoContainer" class="max-w-[75%] max-h-[75%] grid grid-rows-[auto,1fr] grid-cols-3 gap-4 ml">
+    <div id="todoContainer" class="min-w-[75%] min-h-[75%] grid grid-rows-[auto,1fr] grid-cols-3 gap-4 ml">
 
-      <div id="title" class="col-span-3 p-4 bg-gray-200">
-        <h1>To-Do-App</h1>
+      <div id="title" class="col-span-3 p-4 bg-gray-200 rounded">
+        <h1 class="text-lg font-bold text-center text-blue-400">To-Do-App</h1>
       </div>
-      <div id="sidebar" class="flex flex-col col-span-1 p-4 text-center bg-gray-300">
-        <h1>Sidebar</h1>
-        <br>
-        <button class="p-2 m-1 text-white bg-black rounded">Create Note</button>
+      <div id=" sidebar" class="flex flex-col col-span-1 gap-2 p-4 text-center bg-gray-300 rounded">
+        <h1 class="m-1 text-center text-blue-400">Sidebar</h1>
+
+        <Input class="p-2 m-2 placeholder-black bg-gray-200 border-none rounded" placeholder="Folder name"></Input>
+
         <hr>
-        <button class="p-2 m-1 text-white bg-black rounded">Create Folder</button>
+        <button class="p-2 ml-auto mr-auto text-sm text-black bg-green-200 rounded">Create folder</button>
+        <hr>
       </div>
-      <div id="notesContainer" class="flex p-4 bg-gray-100 flex-colcol-span-2">
-        <h1>Create Notes</h1>
+      <div id="notesContainer" class="flex flex-col col-span-2 p-4 bg-gray-100 rounded ">
+        <h1 class="m-2 text-center text-blue-400">Create Notes</h1>
+        <input type=" text" class="p-2 m-2 placeholder-black bg-blue-100 border-none rounded"
+          placeholder="Create new note">
+        <button class="p-2 mb-2 ml-auto mr-auto text-sm bg-green-200 rounded">Create new note</button>
+        <hr>
+
+        <div id="note" class="flex flex-wrap gap-2 p-1 m-2">
+          <p class="p-2 text-white bg-black rounded">Hello Im a note Lorem, ipsum. Lorem ipsum dolor sit.
+            Lorem ipsum
+            dolor sit amet</p>
+          <button class="p-2 bg-orange-200 rounded">done</button>
+          <button class="p-2 bg-blue-200 rounded">edit</button>
+          <button class="p-2 bg-red-200 rounded">delete</button>
+        </div>
       </div>
     </div>
 
