@@ -20,7 +20,7 @@
         <h1 class="m-1 text-center text-blue-400">Sidebar</h1>
 
         <form id="folderForm" class="flex flex-col gap-2 " action="">
-          <input id="folderInput" class="p-2 m-2 placeholder-black bg-gray-200 border-none rounded"
+          <input id="folderInput" class="p-2 m-2 text-white placeholder-gray-400 bg-blue-600 border-none rounded"
             placeholder="Folder name"></input>
           <hr>
           <button id="createFolderBtn" class="p-2 ml-auto mr-auto text-sm text-black bg-green-200 rounded">Create
@@ -32,11 +32,14 @@
         <h1 class="m-2 text-center text-blue-400">Create Notes</h1>
         <form id="notesForm" action="">
           <input id="notesInput" type=" text"
-            class="p-2 m-2 placeholder-black bg-blue-100 border-none rounded min-w-fit" placeholder="Create new note">
-          <button id="noteButton" class="p-2 mb-2 ml-auto mr-auto text-sm bg-green-200 rounded">Create new note</button>
+            class="p-2 m-2 text-white placeholder-gray-400 bg-blue-600 border-none rounded min-w-fit"
+            placeholder="Create New note">
+          <button id="noteButton"
+            class="p-2 mb-2 ml-auto mr-auto md:mr-0 text-sm bg-green-200 rounded sm:content-{note}">
+            New note</button>
         </form>
         <hr>
-        <div id="noteContainer" class="flex flex-wrap gap-2 p-1 m-2">
+        <div id="noteContainer" class="flex flex-col gap-2 p-1 m-2">
         </div>
       </div>
     </div>

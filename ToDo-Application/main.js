@@ -3,6 +3,7 @@ import "./style.css";
 class Note {
   constructor(content) {
     this.content = content;
+    this.isCompleted = false;
   }
   getNoteContent() {
     return this.content;
@@ -45,8 +46,8 @@ class Folder {
 }
 
 class FolderSystem {
-  constructor(folders) {
-    this.folders = folders;
+  constructor() {
+    this.folders = [];
   }
   //folder array
   getFolders() {
@@ -65,17 +66,14 @@ class FolderSystem {
     return this.folders;
   }
 }
+const fileSystem = new FolderSystem();
 // module.exports = { Note, Folder, FolderSystem };
 const folderForm = document.querySelector("#folderForm");
 const folderInput = document.querySelector("#folderInput");
 
-const folderBtn = document.querySelector(
-  "#createFolderBtn"
-);
 const noteForm = document.querySelector("#notesForm");
 const noteInput = document.querySelector("#notesInput");
 
-const noteButton = document.querySelector("#noteButton");
 const noteContainer = document.querySelector(
   "#noteContainer"
 );
@@ -87,7 +85,8 @@ function renderNotes(array, parent) {
     const doneBtn = document.createElement("button");
     const editBtn = document.createElement("button");
     const deleteBtn = document.createElement("button");
-
+    const notesContainerDiv = document.createElement("div");
+    notesContainerDiv.classList.add("flex", "gap-2");
     doneBtn.classList.add(
       "p-2",
       "bg-orange-200",
@@ -99,39 +98,133 @@ function renderNotes(array, parent) {
       "p-2",
       "text-white",
       "bg-black",
-      "rounded"
+      "rounded",
+      "truncate"
     );
     noteEl.textContent = note.getNoteContent();
 
-    parent.appendChild(noteEl);
-    parent.appendChild(doneBtn).textContent = "done";
-    parent.appendChild(editBtn).textContent = "edit";
-    parent.appendChild(deleteBtn).textContent = "delete";
+    if (note.isCompleted) {
+      noteEl.classList.add("bg-green-200");
+    }
+
+    parent.appendChild(notesContainerDiv);
+    notesContainerDiv.appendChild(noteEl);
+    notesContainerDiv.appendChild(doneBtn).textContent =
+      "done";
+
+    doneBtn.addEventListener("click", () => {
+      note.isCompleted = !note.isCompleted;
+      noteEl.classList.toggle("bg-green-200");
+    });
+
+    notesContainerDiv.appendChild(editBtn).textContent =
+      "edit";
+
+    editBtn.addEventListener("click", () => {
+      const newContent = prompt(
+        "Enter new content for the note:",
+        note.getNoteContent()
+      );
+      if (newContent !== null && newContent.trim() !== "") {
+        note.setNoteContent(newContent.trim());
+        renderNotes(array, parent);
+      }
+    });
+
+    notesContainerDiv.appendChild(deleteBtn).textContent =
+      "delete";
+
+    deleteBtn.addEventListener("click", () => {
+      const currentFolder = getCurrentFolder();
+      currentFolder.deleteNote(note);
+      renderNotes(currentFolder.getNotes(), parent);
+    });
   });
 }
 
+function getCurrentFolder() {
+  // Find the current folder based on the active folder button
+  const activeFolderBtn = document.querySelector(
+    ".active-folder"
+  );
+  const folderName = activeFolderBtn.textContent;
+  return fileSystem
+    .getFolders()
+    .find(
+      (folder) => folder.getFolderName() === folderName
+    );
+}
+function createNote() {
+  const inputValue = noteInput.value.trim();
+  if (inputValue !== "") {
+    const note = new Note(inputValue);
+    console.log("New note created", note);
+    const currentFolder = getCurrentFolder();
+    currentFolder.addNotesToFolder(note);
+    noteInput.value = "";
+    renderNotes(currentFolder.getNotes(), noteContainer);
+  }
+}
+
 function createBtn(name, parent, folder) {
+  const folderDiv = document.createElement("div");
+  folderDiv.classList.add(
+    "flex",
+    "items-center",
+    "justify-center",
+    "gap-2"
+  );
+  folderDiv.classList.add("folder-div");
+
   const button = document.createElement("button");
   button.classList.add(
     "p-2",
     "mt-2",
-    "ml-auto",
-    "mr-auto",
     "text-sm",
     "text-black",
     "bg-blue-200",
-    "rounded"
+    "rounded",
+    "folder-button"
   );
-  button.textContent = name;
-  parent.appendChild(button);
+  button.textContent = `${name} folder`;
+  folderDiv.appendChild(button);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = `delete folder`;
+  deleteButton.classList.add(
+    "p-2",
+    "mt-2",
+
+    "text-sm",
+    "text-black",
+    "bg-red-200",
+    "rounded",
+    "folder-delete-button"
+  );
+  folderDiv.appendChild(deleteButton);
+
+  parent.appendChild(folderDiv);
+
+  if (!document.querySelector(".active-folder")) {
+    button.classList.add("active-folder");
+  }
 
   //render notes
   button.addEventListener("click", () => {
-    console.log(
-      "Button clicked. Folder name:",
-      folder.notes
+    const folderButtons = document.querySelectorAll(
+      ".folder-button"
     );
+    folderButtons.forEach((btn) =>
+      btn.classList.remove("active-folder")
+    );
+    button.classList.add("active-folder");
     renderNotes(folder.getNotes(), noteContainer);
+  });
+
+  //delete folder
+  deleteButton.addEventListener("click", () => {
+    fileSystem.deleteFolder(folder);
+    parent.removeChild(folderDiv);
   });
 }
 
@@ -142,6 +235,9 @@ function createFolder() {
     console.log("New folder created:", folder);
     folderInput.value = "";
     createBtn(folder.getFolderName(), folderForm, folder);
+    fileSystem.addFolderToFoldersSystem(folder);
+    console.log(fileSystem.getFolders());
+    return fileSystem;
   }
 }
 
@@ -150,20 +246,7 @@ folderForm.addEventListener("submit", (event) => {
   createFolder();
 });
 
-{
-  /* <div id="note" class="flex flex-wrap gap-2 p-1 m-2">
-  <p class="p-2 text-white bg-black rounded">
-    Hello Im a note Lorem, ipsum. Lorem ipsum dolor sit.
-    Lorem ipsum dolor sit amet
-  </p>
-  <button id="done" class="p-2 bg-orange-200 rounded">
-    done
-  </button>
-  <button id="edit" class="p-2 bg-blue-200 rounded">
-    edit
-  </button>
-  <button id="delete" class="p-2 bg-red-200 rounded">
-    delete
-  </button>
-</div>; */
-}
+noteForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  createNote();
+});
