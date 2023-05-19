@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ToDO-Application</title>
-  <script type="module" src="/main.js" defer></script>
+  <script type="module" src="main.js" defer></script>
+  <link href="./output.css" rel="stylesheet">
+
 </head>
 
-<body class="bg-[url('./img/background.jpg')] bg-cover bg-no-repeat bg-center">
+<body class="bg-[url('./img/background.jpg')] bg-cover bg-no-repeat bg-center ">
   <div id="appContainer" class="flex items-center justify-center h-screen ">
     <div id="todoContainer" class="min-w-[75%] min-h-[75%] grid grid-rows-[auto,1fr] grid-cols-3 gap-4 ml">
 
-      <div id="title" class="col-span-3 p-4 bg-gray-200 rounded">
-        <h1 class="text-lg font-bold text-center text-blue-400">To-Do-App</h1>
+      <div id="title" class="col-span-3 p-4 bg-white shadow-lg rounded-3xl shadow-black">
+        <h1 class="text-lg font-bold text-center text-blue-400">Task Organizer</h1>
       </div>
       <div id=" sidebar"
-        class="bg-[url('./img/sidebar.jpg')] bg-cover bg-no-repeat bg-center flex flex-col col-span-1 gap-2 p-4 text-center bg-gray-300 rounded">
+        class="bg-[url('./img/sidebar.jpg')] bg-cover bg-no-repeat bg-center flex flex-col col-span-1 gap-2 p-4 text-center bg-gray-300 rounded-3xl shadow-2xl shadow-black">
         <h1 class="m-1 text-center text-blue-400">Sidebar</h1>
 
         <form id="folderForm" class="flex flex-col gap-2 " action="">
           <input id="folderInput" class="p-2 m-2 text-black placeholder-gray-400 bg-white border-none rounded"
             placeholder="Name your folder"></input>
           <hr>
-          <button id="createFolderBtn" class="p-2 ml-auto mr-auto text-sm text-black bg-green-200 rounded">
+          <button id="createFolderBtn"
+            class="p-2 ml-auto mr-auto text-sm text-black bg-green-200 rounded shadow-sm shadow-black">
             Enter</button>
           <hr>
         </form>
       </div>
       <div id="notesContainer "
-        class="flex bg-[url('./img/note-img.jpg')] bg-cover bg-no-repeat bg-center flex-col col-span-2 p-4 bg-gray-100 rounded">
+        class="flex bg-[url('./img/note-img.jpg')] bg-cover bg-no-repeat bg-center flex-col col-span-2 p-4 bg-gray-100 rounded-3xl shadow-2xl shadow-black">
         <h1 class="m-2 text-center text-blue-400">Create Notes</h1>
         <form id="notesForm" class="hidden">
           <input id="notesInput" type=" text"
             class="p-2 m-2 text-black placeholder-gray-400 border-none rounded min-w-fit"
             placeholder="Write a new note">
           <button id="noteButton"
-            class="p-2 mb-2 ml-auto mr-auto md:mr-0 text-xsm bg-green-200 rounded sm:content-{note}">
+            class="p-2 mb-2 ml-auto mr-auto md:mr-0 text-xsm bg-green-200 rounded sm:content-{note} shadow-sm shadow-black">
             Enter</button>
         </form>
         <hr>

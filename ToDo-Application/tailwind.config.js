@@ -1,14 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
+
 export default {
-  mode: "jit",
-  purge: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: false,
-  content: [],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
+    extend: {
+      colors: {
+        ...colors,
+      },
+    },
   },
   plugins: [],
 };

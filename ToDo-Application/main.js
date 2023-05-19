@@ -1,4 +1,4 @@
-import "./style.css";
+import "./output.css";
 
 class Note {
   constructor(content) {
@@ -95,19 +95,25 @@ function renderNotes(array, parent) {
     doneBtn.classList.add(
       "p-2",
       "bg-orange-200",
-      "rounded"
+      "rounded",
+      "shadow-sm",
+      "shadow-black"
     );
     editBtn.classList.add(
       "p-2",
       "bg-blue-200",
       "rounded",
-      "mt-4"
+      "mt-4",
+      "shadow-sm",
+      "shadow-black"
     );
     deleteBtn.classList.add(
       "p-2",
       "bg-red-200",
       "rounded",
-      "mt-4"
+      "mt-4",
+      "shadow-sm",
+      "shadow-black"
     );
     noteEl.classList.add(
       "p-2",
@@ -199,7 +205,9 @@ function createBtn(name, parent, folder) {
     "text-black",
     "bg-blue-200",
     "rounded",
-    "folder-button"
+    "folder-button",
+    "shadow-sm",
+    "shadow-black"
   );
   button.textContent = name;
   folderDiv.appendChild(button);
@@ -211,8 +219,9 @@ function createBtn(name, parent, folder) {
     "mt-2",
     "ml-2",
     "text-sm",
-    "text-black",
     "bg-red-200",
+    "shadow-sm",
+    "shadow-black",
     "rounded",
     "folder-delete-button"
   );
@@ -269,6 +278,3 @@ noteForm.addEventListener("submit", (event) => {
   event.preventDefault();
   createNote();
 });
-// if (fileSystem.folders.length === 0) {
-//   alert("Please create a folder");
-// }

@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "jest"
+    "build:css": "tailwindcss -i ./style.css -o public/output.css -w",
+    "watch": "tailwindcss -i ./style.css -o public/output.css --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
