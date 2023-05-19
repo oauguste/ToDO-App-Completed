@@ -86,20 +86,34 @@ function renderNotes(array, parent) {
     const editBtn = document.createElement("button");
     const deleteBtn = document.createElement("button");
     const notesContainerDiv = document.createElement("div");
-    notesContainerDiv.classList.add("flex", "gap-2");
+    notesContainerDiv.classList.add(
+      "flex",
+      "gap-2",
+      "flex-wrap",
+      "mt-4"
+    );
     doneBtn.classList.add(
       "p-2",
       "bg-orange-200",
       "rounded"
     );
-    editBtn.classList.add("p-2", "bg-blue-200", "rounded");
-    deleteBtn.classList.add("p-2", "bg-red-200", "rounded");
+    editBtn.classList.add(
+      "p-2",
+      "bg-blue-200",
+      "rounded",
+      "mt-4"
+    );
+    deleteBtn.classList.add(
+      "p-2",
+      "bg-red-200",
+      "rounded",
+      "mt-4"
+    );
     noteEl.classList.add(
       "p-2",
-      "text-white",
-      "bg-black",
       "rounded",
-      "truncate"
+      "truncate",
+      "mt-4"
     );
     noteEl.textContent = note.getNoteContent();
 
@@ -169,32 +183,33 @@ function createNote() {
 function createBtn(name, parent, folder) {
   const folderDiv = document.createElement("div");
   folderDiv.classList.add(
+    "folder-div",
     "flex",
-    "items-center",
-    "justify-center",
-    "gap-2"
+    "flex-wrap",
+    "gap-2",
+    "justify-center"
   );
-  folderDiv.classList.add("folder-div");
 
   const button = document.createElement("button");
   button.classList.add(
     "p-2",
     "mt-2",
+    "mr-2",
     "text-sm",
     "text-black",
     "bg-blue-200",
     "rounded",
     "folder-button"
   );
-  button.textContent = `${name} folder`;
+  button.textContent = name;
   folderDiv.appendChild(button);
 
   const deleteButton = document.createElement("button");
-  deleteButton.textContent = `delete folder`;
+  deleteButton.textContent = "Delete folder";
   deleteButton.classList.add(
     "p-2",
     "mt-2",
-
+    "ml-2",
     "text-sm",
     "text-black",
     "bg-red-200",
@@ -237,6 +252,10 @@ function createFolder() {
     createBtn(folder.getFolderName(), folderForm, folder);
     fileSystem.addFolderToFoldersSystem(folder);
     console.log(fileSystem.getFolders());
+
+    if (fileSystem.getFolders().length > 0) {
+      noteForm.classList.remove("hidden"); // Show the notesForm div
+    }
     return fileSystem;
   }
 }
@@ -250,3 +269,6 @@ noteForm.addEventListener("submit", (event) => {
   event.preventDefault();
   createNote();
 });
+// if (fileSystem.folders.length === 0) {
+//   alert("Please create a folder");
+// }

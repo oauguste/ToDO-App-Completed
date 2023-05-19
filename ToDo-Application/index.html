@@ -9,37 +9,39 @@
   <script type="module" src="/main.js" defer></script>
 </head>
 
-<body>
+<body class="bg-[url('./img/background.jpg')] bg-cover bg-no-repeat bg-center">
   <div id="appContainer" class="flex items-center justify-center h-screen ">
     <div id="todoContainer" class="min-w-[75%] min-h-[75%] grid grid-rows-[auto,1fr] grid-cols-3 gap-4 ml">
 
       <div id="title" class="col-span-3 p-4 bg-gray-200 rounded">
         <h1 class="text-lg font-bold text-center text-blue-400">To-Do-App</h1>
       </div>
-      <div id=" sidebar" class="flex flex-col col-span-1 gap-2 p-4 text-center bg-gray-300 rounded">
+      <div id=" sidebar"
+        class="bg-[url('./img/sidebar.jpg')] bg-cover bg-no-repeat bg-center flex flex-col col-span-1 gap-2 p-4 text-center bg-gray-300 rounded">
         <h1 class="m-1 text-center text-blue-400">Sidebar</h1>
 
         <form id="folderForm" class="flex flex-col gap-2 " action="">
-          <input id="folderInput" class="p-2 m-2 text-white placeholder-gray-400 bg-blue-600 border-none rounded"
-            placeholder="Folder name"></input>
+          <input id="folderInput" class="p-2 m-2 text-black placeholder-gray-400 bg-white border-none rounded"
+            placeholder="Name your folder"></input>
           <hr>
-          <button id="createFolderBtn" class="p-2 ml-auto mr-auto text-sm text-black bg-green-200 rounded">Create
-            folder</button>
+          <button id="createFolderBtn" class="p-2 ml-auto mr-auto text-sm text-black bg-green-200 rounded">
+            Enter</button>
           <hr>
         </form>
       </div>
-      <div id="notesContainer" class="flex flex-col col-span-2 p-4 bg-gray-100 rounded ">
+      <div id="notesContainer "
+        class="flex bg-[url('./img/note-img.jpg')] bg-cover bg-no-repeat bg-center flex-col col-span-2 p-4 bg-gray-100 rounded">
         <h1 class="m-2 text-center text-blue-400">Create Notes</h1>
-        <form id="notesForm" action="">
+        <form id="notesForm" class="hidden">
           <input id="notesInput" type=" text"
-            class="p-2 m-2 text-white placeholder-gray-400 bg-blue-600 border-none rounded min-w-fit"
-            placeholder="Create New note">
+            class="p-2 m-2 text-black placeholder-gray-400 border-none rounded min-w-fit"
+            placeholder="Write a new note">
           <button id="noteButton"
-            class="p-2 mb-2 ml-auto mr-auto md:mr-0 text-sm bg-green-200 rounded sm:content-{note}">
-            New note</button>
+            class="p-2 mb-2 ml-auto mr-auto md:mr-0 text-xsm bg-green-200 rounded sm:content-{note}">
+            Enter</button>
         </form>
         <hr>
-        <div id="noteContainer" class="flex flex-col gap-2 p-1 m-2">
+        <div id="noteContainer" class="flex flex-col flex-wrap gap-2 p-1 m-2">
         </div>
       </div>
     </div>
